@@ -3,19 +3,16 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Interface.java to edit this template
  */
 
-
-
 package portalucas.portafolio.dao;
 
-
-import portalucas.portafolio.domain.Producto;
+import Portafolio.Portafolio.domain.Producto;
 import java.util.List;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
 
-public interface Producto extends JpaRepository<Producto, Long>{
-
+public interface ProductoDao extends JpaRepository<Producto, Long> {
+    
     //Ejemplo de método utilizando Métodos de Query
     public List<Producto> findByPrecioBetweenOrderByDescripcion(double precioInf, double precioSup);
 
@@ -27,6 +24,4 @@ public interface Producto extends JpaRepository<Producto, Long>{
     @Query(nativeQuery = true,
             value = "SELECT * FROM producto where producto.precio BETWEEN :precioInf AND :precioSup ORDER BY producto.descripcion ASC")
     public List<Producto> metodoNativo(@Param("precioInf") double precioInf, @Param("precioSup") double precioSup);
-
-    
 }
