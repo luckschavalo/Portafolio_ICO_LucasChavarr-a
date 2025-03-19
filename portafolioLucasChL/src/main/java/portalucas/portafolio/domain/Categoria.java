@@ -1,30 +1,56 @@
-
 package portalucas.portafolio.domain;
 
 import jakarta.persistence.*;
 import java.io.Serializable;
-import lombok.Data;
+import java.util.List;
 
-@Data
 @Entity
-@Table(name="categoria")
+@Table(name = "categoria")
 public class Categoria implements Serializable {
-    
-    private static final long serialVersionUID = 1L;
     
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name="id_categoria")
     private Long idCategoria;
-    private String descripcion;
-    private String rutaImagen;
+
+    private String nombre;
     private boolean activo;
 
-    public Categoria() {
+    @OneToMany(mappedBy = "categoria") // Asegúrate de que "categoria" es el nombre correcto en Producto
+    private List<Producto> productos; // Lista de productos en la categoría
+
+    // Constructor vacío
+    public Categoria() {}
+
+    // Getters y Setters
+    public Long getIdCategoria() {
+        return idCategoria;
     }
 
-    public Categoria(String categoria, boolean activo) {
-        this.descripcion = categoria;
+    public void setIdCategoria(Long idCategoria) {
+        this.idCategoria = idCategoria;
+    }
+
+    public String getNombre() {
+        return nombre;
+    }
+
+    public void setNombre(String nombre) {
+        this.nombre = nombre;
+    }
+
+    public boolean isActivo() {
+        return activo;
+    }
+
+    public void setActivo(boolean activo) {
         this.activo = activo;
+    }
+
+    public List<Producto> getProductos() {  // 🔹 ESTE MÉTODO ES CLAVE
+        return productos;
+    }
+
+    public void setProductos(List<Producto> productos) {
+        this.productos = productos;
     }
 }

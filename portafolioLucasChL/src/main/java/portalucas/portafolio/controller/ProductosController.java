@@ -40,9 +40,8 @@ public class ProductosController {
         return "/producto/modifica";
     }
 
-    @Autowired
-    private FirebaseStorageServiceImpl firebaseStorageService;
-    
+ 
+    /*
     @PostMapping("/guardar")
     public String productoGuardar(Producto producto,
             @RequestParam("imagenFile") MultipartFile imagenFile) {        
@@ -56,7 +55,9 @@ public class ProductosController {
         }
         productoService.save(producto);
         return "redirect:/producto/listado";
-    }
+    }*/
+      
+
 
     @GetMapping("/eliminar/{idProducto}")
     public String productoEliminar(Producto producto) {
