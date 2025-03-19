@@ -16,7 +16,9 @@ public class Producto implements Serializable {
 
     @ManyToOne
     @JoinColumn(name = "id_categoria")
-    private Categoria categoria; // 🔹 Relación con Categoria
+    private Categoria categoria;
+
+    private boolean activo;  // 🔹 Agrega este atributo
 
     // Getters y Setters
     public Long getIdProducto() {
@@ -49,5 +51,13 @@ public class Producto implements Serializable {
 
     public void setCategoria(Categoria categoria) {
         this.categoria = categoria;
+    }
+
+    public boolean isActivo() {  // 🔹 Agrega este método
+        return activo;
+    }
+
+    public void setActivo(boolean activo) {  // 🔹 Agrega este setter
+        this.activo = activo;
     }
 }
