@@ -2,62 +2,38 @@ package portalucas.portafolio.domain;
 
 import jakarta.persistence.*;
 import java.io.Serializable;
+import lombok.Data;
 
+
+@Data
 @Entity
-@Table(name = "producto")
+@Table(name="producto")
 public class Producto implements Serializable {
-
+    private static final long serialVersionUID = 1L;
+    
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name="id_producto")
     private Long idProducto;
-
-    private String nombre;
+    //private Long idCategoria;  ya no se usa por el @manyToOne
+    private String descripcion;
+    private String detalle;
     private double precio;
+    private int existencias;
+    private String rutaImagen;
+    private boolean activo;
 
     @ManyToOne
-    @JoinColumn(name = "id_categoria")
-    private Categoria categoria;
+    @JoinColumn(name="id_categoria")
+    Categoria categoria;
 
-    private boolean activo;  // 🔹 Agrega este atributo
 
-    // Getters y Setters
-    public Long getIdProducto() {
-        return idProducto;
+    public Producto() {
     }
 
-    public void setIdProducto(Long idProducto) {
-        this.idProducto = idProducto;
-    }
-
-    public String getNombre() {
-        return nombre;
-    }
-
-    public void setNombre(String nombre) {
-        this.nombre = nombre;
-    }
-
-    public double getPrecio() {
-        return precio;
-    }
-
-    public void setPrecio(double precio) {
-        this.precio = precio;
-    }
-
-    public Categoria getCategoria() {
-        return categoria;
-    }
-
-    public void setCategoria(Categoria categoria) {
-        this.categoria = categoria;
-    }
-
-    public boolean isActivo() {  // 🔹 Agrega este método
-        return activo;
-    }
-
-    public void setActivo(boolean activo) {  // 🔹 Agrega este setter
+    public Producto(String descripcion, boolean activo) {
+        this.descripcion = descripcion;
         this.activo = activo;
     }
+    
 }
